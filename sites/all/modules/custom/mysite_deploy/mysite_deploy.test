@@ -5,3 +5,48 @@
  *
  * Test your site's functionality.
  */
+
+/**
+ * Test case for the site one-step deployment process
+ */
+class MySiteDeployTestCase extends DrupalWebTestCase {
+  /**
+   * Info for the test case
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'My Site Deploy Test Case',
+      'description' => 'My Site Deploy Test Case.',
+      'group' => 'mysite deploy',
+    );
+  }
+
+  /**
+   * Setup to be run before each test
+   */
+  public function setUp() {
+    parent::setUp('mysite_deploy');
+  }
+
+  /**
+   * Main test for this test case.
+   */
+  public function test() {
+    $user = $this->drupalCreateUser(array('administer nodes', 'create image content'));
+    $this->drupalLogin($user);
+    $images = array();
+    $images[] = array('type' => 'image', 'title' => $this->randomName());
+    foreach ($images as $image) {
+      $test_image = current($this->drupalGetTestFiles('image'));
+      $edit = array(
+        'title' => $image['title'],
+        'files[field_myimage_und_0]' => drupal_realpath($test_image->uri),
+      );
+      $this->drupalPost('node/add/image', $edit, 'Save');
+    }
+    $this->drupalGet('gallery');
+    foreach ($images as $image) {
+      $this->assertText($image['title'], 'We have created an image, it should appear in the gallery');
+    }
+  }
+}
