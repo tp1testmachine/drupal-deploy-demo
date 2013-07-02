@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ *
+ * Deployment code, use hook_install() and hook_update_n()s.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function mysite_deploy_install() {
+  theme_enable(array('zen', 'mysite_theme'));
+  variable_set('theme_default', 'mysite_theme');
+}
+
+/**
+ * Enable the module mysite_features
+ */
+function mysite_deploy_update_7001() {
+  module_enable(array('mysite_features'));
+}

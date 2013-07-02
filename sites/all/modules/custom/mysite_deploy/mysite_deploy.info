@@ -1,0 +1,5 @@
+name = mysite deploy
+description = deploy mysite
+core = 7.x
+files[] = mysite_deploy.test
+dependencies[] = mysite_features

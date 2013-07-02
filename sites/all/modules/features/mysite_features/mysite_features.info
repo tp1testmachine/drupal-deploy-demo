@@ -1,0 +1,16 @@
+name = mysite_features
+core = 7.x
+package = Features
+dependencies[] = features
+dependencies[] = image
+dependencies[] = text
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[field_base][] = body
+features[field_base][] = field_myimage
+features[field_instance][] = node-image-body
+features[field_instance][] = node-image-field_myimage
+features[node][] = image
+features[views_view][] = gallery
+features_exclude[dependencies][ctools] = ctools

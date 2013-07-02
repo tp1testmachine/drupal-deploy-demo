@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ *
+ * This file is required but you will probably want to keep it empty, as
+ * deployment code will normally go in mysite_deploy.install.
+ */
