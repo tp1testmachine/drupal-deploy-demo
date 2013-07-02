@@ -3,7 +3,39 @@
 /**
  * @file
  *
- * Deployment code, use hook_install() and hook_update_n()s.
+ * Deployment code, use hook_install() and hook_update_n()s. Use the following
+ * code in your update hooks, for example:
+ *
+ *    // enable module xyz. Don't forget to put your module as a dependency,
+ *    // and don't add this code to the install hook.
+ * module_enable(array('mysite_features'));
+ *
+ *    // Your site will most likely have one or more features as dependencies.
+ *    // By convention we will not (a) use the GUI or drush to revert (deploy)
+ *    // the feature code; or (b) create update hooks within the feature itself
+ *    // (because we don't want to touch generated code). Therefore the
+ *    // following code should go into your deploy module every time you change
+ *    // a feature. Replace myfeature with your feature name, and mycomponent
+ *    // with one of the following:
+ *    //    filter (an text format)
+ *    //    context (a context (see http://drupal.org/project/context))
+ *    //    menu (a menu)
+ *    //    node (content types)
+ *    //    variable (see http://drupal.org/project/strongarm)
+ *    //    field_base (a field's fundamental structure)
+ *    //    field_instance (a field instance's structure)
+ *    //    etc. (see the machine names in parentheses in
+ *    //      admin/structure/features/mysite_features/recreate)
+ *    // Don't call this in the install hook, because on installation the
+ *    // dependency which is your feature will automatically be in the latest
+ *    // state.
+ * features_revert(array('myfeature' => array('mycomponent')));
+ *
+ *    // Disable and uninstall modules programmatically (the comment module
+ *    // for example, or the toolbar or overlay)
+ *    // This code SHOULD ALSO be called in your install hook.
+ * module_disable(array('overlay'));
+ * drupal_uninstall_modules(array('overlay'));
  */
 
 /**
