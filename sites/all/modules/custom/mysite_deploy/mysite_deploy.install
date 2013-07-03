@@ -52,3 +52,13 @@ function mysite_deploy_install() {
 function mysite_deploy_update_7001() {
   module_enable(array('mysite_features'));
 }
+
+/**
+ * Nouveau bloc de cote et plus belles images
+ */
+function mysite_deploy_update_7002() {
+  module_enable(array('context'));
+  features_revert(array('mysite_features' => array('views_view')));
+  features_revert(array('mysite_features' => array('image')));
+  features_revert(array('mysite_features' => array('context')));
+}

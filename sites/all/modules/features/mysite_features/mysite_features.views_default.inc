@@ -45,7 +45,7 @@ function mysite_features_views_default_views() {
   $handler->display->display_options['fields']['field_myimage']['field'] = 'field_myimage';
   $handler->display->display_options['fields']['field_myimage']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_myimage']['settings'] = array(
-    'image_style' => 'medium',
+    'image_style' => 'monstyle',
     'image_link' => 'content',
   );
   /* Sort criterion: Content: Post date */
@@ -74,6 +74,15 @@ function mysite_features_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Gallery';
   $handler->display->display_options['menu']['name'] = 'main-menu';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $export['gallery'] = $view;
 
   return $export;
